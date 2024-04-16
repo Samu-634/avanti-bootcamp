@@ -1,0 +1,7 @@
+variavel,descricao,tipo,subtipo
+Unnamed: 0,id,quantitativa,continua
+id,identificacao,quantitativa,discreta
+diet,dieta dos animais,qualitativa,nominal
+pulse,batimentos cardiacos,quantitativa,discreta
+time,tempo de medicao,quantitativa,discreta
+kind,estado do animal na medicao,qualitativa,nominal
