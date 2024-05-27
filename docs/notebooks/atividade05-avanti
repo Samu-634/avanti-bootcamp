@@ -1,0 +1,524 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+
+      },
+      "source": [
+        "# Análise exploratória de dados"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "tags": []
+      },
+      "outputs": [],
+      "source": [
+        "from IPython.display import display, Markdown\n",
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 5,
+      "metadata": {
+        "tags": []
+      },
+      "outputs": [],
+      "source": [
+        "#Coleta de dados\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 9,
+      "metadata": {
+        "tags": []
+      },
+      "outputs": [
+        {
+          "data": {
+            "text/html": [
+              "\u003Cdiv\u003E\n",
+              "\u003Cstyle scoped\u003E\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "\u003C/style\u003E\n",
+              "\u003Ctable border=\"1\" class=\"dataframe\"\u003E\n",
+              "  \u003Cthead\u003E\n",
+              "    \u003Ctr style=\"text-align: right;\"\u003E\n",
+              "      \u003Cth\u003E\u003C/th\u003E\n",
+              "      \u003Cth\u003EUnnamed: 0\u003C/th\u003E\n",
+              "      \u003Cth\u003Eid\u003C/th\u003E\n",
+              "      \u003Cth\u003Ediet\u003C/th\u003E\n",
+              "      \u003Cth\u003Epulse\u003C/th\u003E\n",
+              "      \u003Cth\u003Etime\u003C/th\u003E\n",
+              "      \u003Cth\u003Ekind\u003C/th\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "  \u003C/thead\u003E\n",
+              "  \u003Ctbody\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E0\u003C/th\u003E\n",
+              "      \u003Ctd\u003E0\u003C/td\u003E\n",
+              "      \u003Ctd\u003E1\u003C/td\u003E\n",
+              "      \u003Ctd\u003Elow fat\u003C/td\u003E\n",
+              "      \u003Ctd\u003E85\u003C/td\u003E\n",
+              "      \u003Ctd\u003E1 min\u003C/td\u003E\n",
+              "      \u003Ctd\u003Erest\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E1\u003C/th\u003E\n",
+              "      \u003Ctd\u003E1\u003C/td\u003E\n",
+              "      \u003Ctd\u003E1\u003C/td\u003E\n",
+              "      \u003Ctd\u003Elow fat\u003C/td\u003E\n",
+              "      \u003Ctd\u003E85\u003C/td\u003E\n",
+              "      \u003Ctd\u003E15 min\u003C/td\u003E\n",
+              "      \u003Ctd\u003Erest\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E2\u003C/th\u003E\n",
+              "      \u003Ctd\u003E2\u003C/td\u003E\n",
+              "      \u003Ctd\u003E1\u003C/td\u003E\n",
+              "      \u003Ctd\u003Elow fat\u003C/td\u003E\n",
+              "      \u003Ctd\u003E88\u003C/td\u003E\n",
+              "      \u003Ctd\u003E30 min\u003C/td\u003E\n",
+              "      \u003Ctd\u003Erest\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E3\u003C/th\u003E\n",
+              "      \u003Ctd\u003E3\u003C/td\u003E\n",
+              "      \u003Ctd\u003E2\u003C/td\u003E\n",
+              "      \u003Ctd\u003Elow fat\u003C/td\u003E\n",
+              "      \u003Ctd\u003E90\u003C/td\u003E\n",
+              "      \u003Ctd\u003E1 min\u003C/td\u003E\n",
+              "      \u003Ctd\u003Erest\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E4\u003C/th\u003E\n",
+              "      \u003Ctd\u003E4\u003C/td\u003E\n",
+              "      \u003Ctd\u003E2\u003C/td\u003E\n",
+              "      \u003Ctd\u003Elow fat\u003C/td\u003E\n",
+              "      \u003Ctd\u003E92\u003C/td\u003E\n",
+              "      \u003Ctd\u003E15 min\u003C/td\u003E\n",
+              "      \u003Ctd\u003Erest\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "  \u003C/tbody\u003E\n",
+              "\u003C/table\u003E\n",
+              "\u003C/div\u003E"
+            ],
+            "text/plain": [
+              "   Unnamed: 0  id     diet  pulse    time  kind\n",
+              "0           0   1  low fat     85   1 min  rest\n",
+              "1           1   1  low fat     85  15 min  rest\n",
+              "2           2   1  low fat     88  30 min  rest\n",
+              "3           3   2  low fat     90   1 min  rest\n",
+              "4           4   2  low fat     92  15 min  rest"
+            ]
+          },
+          "execution_count": 9,
+          "metadata": {
+
+          },
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "df = sns.load_dataset('exercise')\n",
+        "df.to_csv('/home/samuel_caldeira/avanti-bootcamp/data/raw.csv', index=False)\n",
+        "df.head()"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+
+      },
+      "source": [
+        "## 1. Descrição dos dados"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 12,
+      "metadata": {
+        "tags": []
+      },
+      "outputs": [],
+      "source": [
+        "#Dados sobre exercícios físicos, estes relacionam o tipo de dieta, a medição do pulso,\n",
+        "#o tempo de medição, e se a medição foi realizada no tempo de descanso."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+
+      },
+      "source": [
+        "## 2. Perguntas de partida e hipóteses"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 13,
+      "metadata": {
+        "tags": []
+      },
+      "outputs": [
+        {
+          "data": {
+            "text/html": [
+              "\u003Cdiv\u003E\n",
+              "\u003Cstyle scoped\u003E\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "\u003C/style\u003E\n",
+              "\u003Ctable border=\"1\" class=\"dataframe\"\u003E\n",
+              "  \u003Cthead\u003E\n",
+              "    \u003Ctr style=\"text-align: right;\"\u003E\n",
+              "      \u003Cth\u003E\u003C/th\u003E\n",
+              "      \u003Cth\u003EUnnamed: 0\u003C/th\u003E\n",
+              "      \u003Cth\u003Eid\u003C/th\u003E\n",
+              "      \u003Cth\u003Ediet\u003C/th\u003E\n",
+              "      \u003Cth\u003Epulse\u003C/th\u003E\n",
+              "      \u003Cth\u003Etime\u003C/th\u003E\n",
+              "      \u003Cth\u003Ekind\u003C/th\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "  \u003C/thead\u003E\n",
+              "  \u003Ctbody\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E19\u003C/th\u003E\n",
+              "      \u003Ctd\u003E19\u003C/td\u003E\n",
+              "      \u003Ctd\u003E7\u003C/td\u003E\n",
+              "      \u003Ctd\u003Eno fat\u003C/td\u003E\n",
+              "      \u003Ctd\u003E88\u003C/td\u003E\n",
+              "      \u003Ctd\u003E15 min\u003C/td\u003E\n",
+              "      \u003Ctd\u003Erest\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "  \u003C/tbody\u003E\n",
+              "\u003C/table\u003E\n",
+              "\u003C/div\u003E"
+            ],
+            "text/plain": [
+              "    Unnamed: 0  id    diet  pulse    time  kind\n",
+              "19          19   7  no fat     88  15 min  rest"
+            ]
+          },
+          "execution_count": 13,
+          "metadata": {
+
+          },
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "df.sample()"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+
+      },
+      "outputs": [],
+      "source": [
+        "#Existem dados ausentes?\n",
+        "#Os dados são aparetemente discrepantes?\n",
+        "#Os valores dos pulsos medidos sofrem influência do tipo de dieta?\n",
+        "#Por que foram usados três tempos diferentes nas medições de pulso? Isso favorece a estatística descritiva?\n",
+        "#Quando se aumenta o tempo de medida, o valor médio de pulsação aumenta?\n",
+        "#Qual a distribuição dos dados?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 14,
+      "metadata": {
+        "tags": []
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "\u003Cclass 'pandas.core.frame.DataFrame'\u003E\n",
+            "RangeIndex: 90 entries, 0 to 89\n",
+            "Data columns (total 6 columns):\n",
+            " #   Column      Non-Null Count  Dtype   \n",
+            "---  ------      --------------  -----   \n",
+            " 0   Unnamed: 0  90 non-null     int64   \n",
+            " 1   id          90 non-null     int64   \n",
+            " 2   diet        90 non-null     category\n",
+            " 3   pulse       90 non-null     int64   \n",
+            " 4   time        90 non-null     category\n",
+            " 5   kind        90 non-null     category\n",
+            "dtypes: category(3), int64(3)\n",
+            "memory usage: 2.9 KB\n"
+          ]
+        }
+      ],
+      "source": [
+        "df.info()"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 15,
+      "metadata": {
+        "tags": []
+      },
+      "outputs": [
+        {
+          "data": {
+            "text/html": [
+              "\u003Cdiv\u003E\n",
+              "\u003Cstyle scoped\u003E\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "\u003C/style\u003E\n",
+              "\u003Ctable border=\"1\" class=\"dataframe\"\u003E\n",
+              "  \u003Cthead\u003E\n",
+              "    \u003Ctr style=\"text-align: right;\"\u003E\n",
+              "      \u003Cth\u003E\u003C/th\u003E\n",
+              "      \u003Cth\u003EUnnamed: 0\u003C/th\u003E\n",
+              "      \u003Cth\u003Eid\u003C/th\u003E\n",
+              "      \u003Cth\u003Ediet\u003C/th\u003E\n",
+              "      \u003Cth\u003Epulse\u003C/th\u003E\n",
+              "      \u003Cth\u003Etime\u003C/th\u003E\n",
+              "      \u003Cth\u003Ekind\u003C/th\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "  \u003C/thead\u003E\n",
+              "  \u003Ctbody\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Ecount\u003C/th\u003E\n",
+              "      \u003Ctd\u003E90.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E90.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E90\u003C/td\u003E\n",
+              "      \u003Ctd\u003E90.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E90\u003C/td\u003E\n",
+              "      \u003Ctd\u003E90\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Eunique\u003C/th\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E2\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E3\u003C/td\u003E\n",
+              "      \u003Ctd\u003E3\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Etop\u003C/th\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003Eno fat\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E1 min\u003C/td\u003E\n",
+              "      \u003Ctd\u003Erest\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Efreq\u003C/th\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E45\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E30\u003C/td\u003E\n",
+              "      \u003Ctd\u003E30\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Emean\u003C/th\u003E\n",
+              "      \u003Ctd\u003E44.500000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E15.500000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E99.700000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Estd\u003C/th\u003E\n",
+              "      \u003Ctd\u003E26.124701\u003C/td\u003E\n",
+              "      \u003Ctd\u003E8.703932\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E14.858471\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Emin\u003C/th\u003E\n",
+              "      \u003Ctd\u003E0.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E1.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E80.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E25%\u003C/th\u003E\n",
+              "      \u003Ctd\u003E22.250000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E8.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E90.250000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E50%\u003C/th\u003E\n",
+              "      \u003Ctd\u003E44.500000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E15.500000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E96.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003E75%\u003C/th\u003E\n",
+              "      \u003Ctd\u003E66.750000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E23.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E103.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "    \u003Ctr\u003E\n",
+              "      \u003Cth\u003Emax\u003C/th\u003E\n",
+              "      \u003Ctd\u003E89.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003E30.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003E150.000000\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "      \u003Ctd\u003ENaN\u003C/td\u003E\n",
+              "    \u003C/tr\u003E\n",
+              "  \u003C/tbody\u003E\n",
+              "\u003C/table\u003E\n",
+              "\u003C/div\u003E"
+            ],
+            "text/plain": [
+              "        Unnamed: 0         id    diet       pulse   time  kind\n",
+              "count    90.000000  90.000000      90   90.000000     90    90\n",
+              "unique         NaN        NaN       2         NaN      3     3\n",
+              "top            NaN        NaN  no fat         NaN  1 min  rest\n",
+              "freq           NaN        NaN      45         NaN     30    30\n",
+              "mean     44.500000  15.500000     NaN   99.700000    NaN   NaN\n",
+              "std      26.124701   8.703932     NaN   14.858471    NaN   NaN\n",
+              "min       0.000000   1.000000     NaN   80.000000    NaN   NaN\n",
+              "25%      22.250000   8.000000     NaN   90.250000    NaN   NaN\n",
+              "50%      44.500000  15.500000     NaN   96.000000    NaN   NaN\n",
+              "75%      66.750000  23.000000     NaN  103.000000    NaN   NaN\n",
+              "max      89.000000  30.000000     NaN  150.000000    NaN   NaN"
+            ]
+          },
+          "execution_count": 15,
+          "metadata": {
+
+          },
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "df.describe(include='all')"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+
+      },
+      "outputs": [],
+      "source": [
+        "#existem dois tipos de dietas\n",
+        "#a dieta predominante é \"low fat\"\n",
+        "#o tipo da medição mais frequente foi com a pessoa descansando\n",
+        "#o valor de pulso mínimo é 80, que é pouco mais da metade do pulso máximo de 150\n",
+        "#o pulso médio é de 99.77."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+
+      },
+      "source": [
+        "## 3. Insights"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+
+      },
+      "outputs": [],
+      "source": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3 (ipykernel)",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.10.10"
+    },
+    "vscode": {
+      "interpreter": {
+        "hash": "eb3c3305d8b111f0102f4f519c5f17abd113fe74db6752c355e994a9008815ef"
+      }
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 4
+}
